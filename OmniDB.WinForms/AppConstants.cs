@@ -8,6 +8,11 @@
         /// <summary>
         /// 配置文件名称
         /// </summary>
-        public const string ConfigFileName = "connection_settings.json";
+        private const string ConfigFileName = "connection_settings.json";
+        public static string GetConfigFileName()
+        {
+            string appPath = AppDomain.CurrentDomain.BaseDirectory;
+            return Path.Combine(appPath, ConfigFileName);
+        }
     }
 }

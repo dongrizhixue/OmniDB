@@ -68,10 +68,10 @@ namespace OmniDB.WinForms
             {
                 // 读取现有数据
                 var allSettings = new List<ConnectionSettings>();
-
-                if (File.Exists(AppConstants.ConfigFileName))
+                string configFilePath = AppConstants.GetConfigFileName();
+                if (File.Exists(configFilePath))
                 {
-                    var json = File.ReadAllText(AppConstants.ConfigFileName);
+                    var json = File.ReadAllText(configFilePath);
                     if (!string.IsNullOrWhiteSpace(json))
                     {
                         allSettings = JsonConvert.DeserializeObject<List<ConnectionSettings>>(json) ?? [];
@@ -83,7 +83,7 @@ namespace OmniDB.WinForms
 
                 // 保存回文件
                 var outputJson = JsonConvert.SerializeObject(allSettings, Formatting.Indented);
-                File.WriteAllText(AppConstants.ConfigFileName, outputJson);
+                File.WriteAllText(configFilePath, outputJson);
 
                 DialogResult = DialogResult.OK;
             }
