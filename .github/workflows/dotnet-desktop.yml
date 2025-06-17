@@ -1,0 +1,33 @@
+name: .NET 9.0 Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install .NET 9.0
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0.x'
+
+    - name: Build (Restore + Build)
+      run: |
+        dotnet restore
+        dotnet build --configuration Release --no-restore
+
+    - name: Upload Release Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: App-Build
+        path: |
+          bin/Release/net9.0-windows/**/*.exe
+          bin/Release/net9.0-windows/**/*.dll
