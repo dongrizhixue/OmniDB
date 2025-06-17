@@ -31,6 +31,7 @@
             menuStrip1 = new MenuStrip();
             连接ToolStripMenuItem = new ToolStripMenuItem();
             TSMINewConnection = new ToolStripMenuItem();
+            TSMIConnectionSettingsList = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -45,7 +46,7 @@
             // 
             // 连接ToolStripMenuItem
             // 
-            连接ToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { TSMINewConnection });
+            连接ToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { TSMINewConnection, TSMIConnectionSettingsList });
             连接ToolStripMenuItem.Name = "连接ToolStripMenuItem";
             连接ToolStripMenuItem.Size = new Size(44, 21);
             连接ToolStripMenuItem.Text = "连接";
@@ -56,6 +57,12 @@
             TSMINewConnection.Size = new Size(180, 22);
             TSMINewConnection.Text = "新建连接";
             // 
+            // TSMIConnectionSettingsList
+            // 
+            TSMIConnectionSettingsList.Name = "TSMIConnectionSettingsList";
+            TSMIConnectionSettingsList.Size = new Size(180, 22);
+            TSMIConnectionSettingsList.Text = "连接列表";
+            // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
@@ -65,6 +72,7 @@
             MainMenuStrip = menuStrip1;
             Name = "FormMain";
             Text = "数据连接工具";
+            WindowState = FormWindowState.Maximized;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);
@@ -76,5 +84,6 @@
         private MenuStrip menuStrip1;
         private ToolStripMenuItem 连接ToolStripMenuItem;
         private ToolStripMenuItem TSMINewConnection;
+        private ToolStripMenuItem TSMIConnectionSettingsList;
     }
 }
