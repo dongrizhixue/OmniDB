@@ -35,7 +35,6 @@ namespace OmniDB.WinForms
             dgvSettings.ReadOnly = true;
             dgvSettings.Size = new Size(933, 588);
             dgvSettings.TabIndex = 0;
-            dgvSettings.CellClick += DgvSettings_CellClick;
             // 
             // ColumnName
             // 
