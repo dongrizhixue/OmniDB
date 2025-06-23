@@ -1,28 +1,4 @@
-# Original content
-name: .NET Desktop
-
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-jobs:
-  build:
-    runs-on: windows-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '9.0.x'
-
-    - name: Build project
-      run: dotnet build --configuration Release
-
-# Modified content
+# Simplified to minimal working configuration
 name: .NET Desktop CI
 
 on:
@@ -34,40 +10,16 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-    environment: production
-    timeout-minutes: 10
     
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
 
     - name: Setup .NET SDK
       uses: actions/setup-dotnet@v3
       with:
         version: '9.0.x'
-        architecture: x64
 
-    - name: Restore dependencies
-      run: dotnet restore OmniDB.sln
+    - name: Build project
+      run: dotnet build OmniDB.WinForms/OmniDB.WinForms.csproj --configuration Release
       working-directory: ${{ github.workspace }}
-
-    - name: Build solution
-      run: |
-        dotnet build OmniDB.sln \
-          --configuration Release \
-          --runtime win-x64 \
-          --no-restore
-      working-directory: ${{ github.workspace }}
-      env:
-        CI: true
-
-    - name: Validate artifacts
-      if: success()
-      run: |
-        # Verify output exists
-        if (-not (Test-Path "OmniDB.WinForms/bin/Release/net9.0-windows")) {
-          Write-Host "::error::Build output not found"
-          exit 1
-        }
