@@ -26,7 +26,7 @@ namespace OmniDB.WinForms
             catch (Exception ex)
             {
                 MessageBox.Show($"数据库连接失败: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Close();
+                Close();
             }
         }
 
@@ -34,10 +34,21 @@ namespace OmniDB.WinForms
         {
             try
             {
+                
+                if (connection == null)
+                {
+                    MessageBox.Show("数据库连接未建立", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 DataTable tables = connection.GetSchema("Tables");
                 foreach (DataRow row in tables.Rows)
                 {
-                    string tableName = row["TABLE_NAME"].ToString();
+                    string tableName = row["TABLE_NAME"]?.ToString() ?? string.Empty;
+                    if (string.IsNullOrEmpty(tableName))
+                    {
+                        continue; // 跳过空表名
+                    }
                     var node = new TreeNode(tableName)
                     {
                         Tag = tableName
@@ -80,31 +91,41 @@ namespace OmniDB.WinForms
         private void ShowResult(DataTable dataTable)
         {
             dgvResults.DataSource = dataTable;
-            tabControl.SelectedTab = tabResults;
+            dgvResults.Visible = true;
+
         }
 
         private void ShowStatus(string message)
         {
             txtResults.Text = message;
-            tabControl.SelectedTab = tabResults;
         }
 
         private void ShowError(string message)
         {
             txtResults.Text = $"错误: {message}";
-            tabControl.SelectedTab = tabResults;
         }
 
-        private void btnExecute_Click(object sender, EventArgs e)
+        private void BtnExecute_Click(object sender, EventArgs e)
         {
             ExecuteQuery(txtSqlInput.Text.Trim());
         }
 
-        private void treeDatabaseObjects_AfterSelect(object sender, TreeViewEventArgs e)
+        private void TreeDatabaseObjects_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (e.Node.Tag is string tableName)
+            if (e.Node?.Tag is string tableName && connection != null)
             {
-                txtSqlInput.Text = $"SELECT * FROM `{tableName}` LIMIT 100";
+                try
+                {
+                    using var cmd = new MySqlCommand($"DESCRIBE {tableName}", connection);
+                    using var reader = cmd.ExecuteReader();
+                    DataTable schemaTable = new();
+                    schemaTable.Load(reader);
+                    dgvTableStructure.DataSource = schemaTable;
+                }
+                catch (Exception ex)
+                {
+                    ShowError($"获取表结构失败: {ex.Message}");
+                }
             }
         }
 
