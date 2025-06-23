@@ -1,4 +1,5 @@
-name: .NET 9.0 Build
+# Original content
+name: .NET Desktop
 
 on:
   push:
@@ -9,40 +10,64 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-    
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v3
 
-    - name: Install .NET 9.0 SDK
-      uses: actions/setup-dotnet@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '9.0.x'
-        # 安装Windows x64运行时依赖
+
+    - name: Build project
+      run: dotnet build --configuration Release
+
+# Modified content
+name: .NET Desktop CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    environment: production
+    timeout-minutes: 10
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v3
+      with:
+        version: '9.0.x'
         architecture: x64
 
-    - name: Build and Publish Self-contained App
-      run: |
-        # 恢复依赖
-        dotnet restore
-        
-        # 清理之前的构建
-        dotnet clean --configuration Release
-        
-        # 发布独立应用
-        dotnet publish --configuration Release \
-                      -r win-x64 \
-                      --self-contained \
-                      -p:PublishSingleFile=true \
-                      -p:IncludeNativeLibrariesForSelfExtract=true \
-                      -p:DebugType=None \
-                      -p:EnableCompressionInSingleFile=true
+    - name: Restore dependencies
+      run: dotnet restore OmniDB.sln
+      working-directory: ${{ github.workspace }}
 
-    - name: Upload Release Artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: App-Build
-        path: |
-          bin/Release/net9.0-windows/win-x64/publish/*.exe
-          bin/Release/net9.0-windows/win-x64/publish/*.dll
-          bin/Release/net9.0-windows/win-x64/publish/*.pdb
+    - name: Build solution
+      run: |
+        dotnet build OmniDB.sln \
+          --configuration Release \
+          --runtime win-x64 \
+          --no-restore
+      working-directory: ${{ github.workspace }}
+      env:
+        CI: true
+
+    - name: Validate artifacts
+      if: success()
+      run: |
+        # Verify output exists
+        if (-not (Test-Path "OmniDB.WinForms/bin/Release/net9.0-windows")) {
+          Write-Host "::error::Build output not found"
+          exit 1
+        }
