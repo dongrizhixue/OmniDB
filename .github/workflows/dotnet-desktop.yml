@@ -1,0 +1,48 @@
+name: .NET 9.0 Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install .NET 9.0 SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0.x'
+        # 安装Windows x64运行时依赖
+        architecture: x64
+
+    - name: Build and Publish Self-contained App
+      run: |
+        # 恢复依赖
+        dotnet restore
+        
+        # 清理之前的构建
+        dotnet clean --configuration Release
+        
+        # 发布独立应用
+        dotnet publish --configuration Release \
+                      -r win-x64 \
+                      --self-contained \
+                      -p:PublishSingleFile=true \
+                      -p:IncludeNativeLibrariesForSelfExtract=true \
+                      -p:DebugType=None \
+                      -p:EnableCompressionInSingleFile=true
+
+    - name: Upload Release Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: App-Build
+        path: |
+          bin/Release/net9.0-windows/win-x64/publish/*.exe
+          bin/Release/net9.0-windows/win-x64/publish/*.dll
+          bin/Release/net9.0-windows/win-x64/publish/*.pdb
