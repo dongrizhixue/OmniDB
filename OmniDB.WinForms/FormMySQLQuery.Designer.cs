@@ -17,6 +17,7 @@ namespace OmniDB.WinForms
             txtSqlInput = new RichTextBox();
             dgvResults = new DataGridView();
             txtResults = new RichTextBox();
+            btnSaveSql = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvTableStructure).BeginInit();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvResults).BeginInit();
@@ -43,6 +44,7 @@ namespace OmniDB.WinForms
             // panel1
             // 
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel1.Controls.Add(btnSaveSql);
             panel1.Controls.Add(btnExecute);
             panel1.Controls.Add(txtSqlInput);
             panel1.Controls.Add(dgvResults);
@@ -54,7 +56,7 @@ namespace OmniDB.WinForms
             // 
             // btnExecute
             // 
-            btnExecute.Location = new Point(0, 0);
+            btnExecute.Location = new Point(3, 3);
             btnExecute.Name = "btnExecute";
             btnExecute.Size = new Size(75, 23);
             btnExecute.TabIndex = 1;
@@ -89,6 +91,15 @@ namespace OmniDB.WinForms
             txtResults.TabIndex = 0;
             txtResults.Text = "";
             // 
+            // btnSaveSql
+            // 
+            btnSaveSql.Location = new Point(84, 3);
+            btnSaveSql.Name = "btnSaveSql";
+            btnSaveSql.Size = new Size(75, 23);
+            btnSaveSql.TabIndex = 2;
+            btnSaveSql.Text = "保存SQL";
+            btnSaveSql.UseVisualStyleBackColor = true;
+            // 
             // FormMySQLQuery
             // 
             ClientSize = new Size(784, 561);
@@ -106,5 +117,6 @@ namespace OmniDB.WinForms
         }
         private Panel panel1;
         private DataGridView dgvTableStructure;
+        private Button btnSaveSql;
     }
 }

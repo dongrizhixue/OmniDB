@@ -28,110 +28,110 @@ namespace OmniDB.WinForms
         /// </summary>
         private void InitializeComponent()
         {
-            this.cmbConnectionType = new System.Windows.Forms.ComboBox();
-            this.txtConnectionString = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.txtConnectionName = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            cmbConnectionType = new ComboBox();
+            txtConnectionString = new TextBox();
+            label1 = new Label();
+            label2 = new Label();
+            btnSave = new Button();
+            btnCancel = new Button();
+            txtConnectionName = new TextBox();
+            label3 = new Label();
+            SuspendLayout();
             // 
             // cmbConnectionType
             // 
-            this.cmbConnectionType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbConnectionType.FormattingEnabled = true;
-            this.cmbConnectionType.Location = new System.Drawing.Point(150, 30);
-            this.cmbConnectionType.Name = "cmbConnectionType";
-            this.cmbConnectionType.Size = new System.Drawing.Size(200, 25);
-            this.cmbConnectionType.TabIndex = 0;
+            cmbConnectionType.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbConnectionType.FormattingEnabled = true;
+            cmbConnectionType.Location = new Point(135, 100);
+            cmbConnectionType.Name = "cmbConnectionType";
+            cmbConnectionType.Size = new Size(300, 25);
+            cmbConnectionType.TabIndex = 0;
             // 
             // txtConnectionString
             // 
-            this.txtConnectionString.Location = new System.Drawing.Point(150, 70);
-            this.txtConnectionString.Multiline = true;
-            this.txtConnectionString.Name = "txtConnectionString";
-            this.txtConnectionString.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtConnectionString.Size = new System.Drawing.Size(300, 100);
-            this.txtConnectionString.TabIndex = 1;
+            txtConnectionString.Location = new Point(135, 131);
+            txtConnectionString.Multiline = true;
+            txtConnectionString.Name = "txtConnectionString";
+            txtConnectionString.ScrollBars = ScrollBars.Vertical;
+            txtConnectionString.Size = new Size(300, 100);
+            txtConnectionString.TabIndex = 1;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(30, 33);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 17);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "连接类型：";
+            label1.AutoSize = true;
+            label1.Location = new Point(61, 104);
+            label1.Name = "label1";
+            label1.Size = new Size(68, 17);
+            label1.TabIndex = 2;
+            label1.Text = "连接类型：";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(30, 73);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(90, 17);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "连接字符串：";
+            label2.AutoSize = true;
+            label2.Location = new Point(49, 131);
+            label2.Name = "label2";
+            label2.Size = new Size(80, 17);
+            label2.TabIndex = 3;
+            label2.Text = "连接字符串：";
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(300, 180);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 25);
-            this.btnSave.TabIndex = 4;
-            this.btnSave.Text = "保存";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
+            btnSave.Location = new Point(285, 241);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(75, 25);
+            btnSave.TabIndex = 4;
+            btnSave.Text = "保存";
+            btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += BtnSave_Click;
             // 
             // btnCancel
             // 
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(375, 180);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 25);
-            this.btnCancel.TabIndex = 5;
-            this.btnCancel.Text = "取消";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
+            btnCancel.DialogResult = DialogResult.Cancel;
+            btnCancel.Location = new Point(360, 241);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new Size(75, 25);
+            btnCancel.TabIndex = 5;
+            btnCancel.Text = "取消";
+            btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Click += BtnCancel_Click;
             // 
             // txtConnectionName
             // 
-            this.txtConnectionName.Location = new System.Drawing.Point(150, 10);
-            this.txtConnectionName.Name = "txtConnectionName";
-            this.txtConnectionName.Size = new System.Drawing.Size(200, 25);
-            this.txtConnectionName.TabIndex = 6;
+            txtConnectionName.Location = new Point(135, 71);
+            txtConnectionName.Name = "txtConnectionName";
+            txtConnectionName.Size = new Size(300, 23);
+            txtConnectionName.TabIndex = 6;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(30, 13);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(90, 17);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "连接名称：";
+            label3.AutoSize = true;
+            label3.Location = new Point(61, 74);
+            label3.Name = "label3";
+            label3.Size = new Size(68, 17);
+            label3.TabIndex = 7;
+            label3.Text = "连接名称：";
             // 
             // FormAddConnectionSettings
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(480, 220);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtConnectionName);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtConnectionString);
-            this.Controls.Add(this.cmbConnectionType);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "FormAddConnectionSettings";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "新增连接设置";
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(7F, 17F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(484, 336);
+            Controls.Add(label3);
+            Controls.Add(txtConnectionName);
+            Controls.Add(btnCancel);
+            Controls.Add(btnSave);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(txtConnectionString);
+            Controls.Add(cmbConnectionType);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "FormAddConnectionSettings";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "新增连接设置";
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 

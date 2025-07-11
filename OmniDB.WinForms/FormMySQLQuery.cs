@@ -22,12 +22,18 @@ namespace OmniDB.WinForms
                 connection = new MySqlConnection(connectionString);
                 connection.Open();
                 LoadTables();
+                btnSaveSql.Click += BtnSaveSql_Click;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"数据库连接失败: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Close();
             }
+        }
+
+        private void BtnSaveSql_Click(object? sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void LoadTables()
