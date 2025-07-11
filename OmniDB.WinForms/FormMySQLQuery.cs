@@ -74,7 +74,9 @@ namespace OmniDB.WinForms
                     using var reader = cmd.ExecuteReader();
                     DataTable resultTable = new();
                     resultTable.Load(reader);
+                    int rowCount = resultTable.Rows.Count;  // 这里获取行数
                     ShowResult(resultTable);
+                    ShowStatus($"查询完成，返回 {rowCount} 行");
                 }
                 else
                 {
